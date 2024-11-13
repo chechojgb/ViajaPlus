@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained('users');//Referencia a la tabla usuarios
+            $table->string('name');//Nombre del destino
+            $table->text('description');//Descripccion del destin
+            $table->string('country');//Pais
+            $table->string('city');//Region o ciudad
+            $table->string('image');//Url de imagen destacada
+            $table->integer('score');//puntaje
+            $table->timestamps();//Fechas de creacion y actualizacion
         });
     }
 
