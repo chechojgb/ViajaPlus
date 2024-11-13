@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('title_experience');//titulo de la experiencia
+            $table->text('description');//Descripcion de la experiencia
+            $table->decimal('price');//Precio
+            $table->string('duration');//Duracion
+            $table->enum('type_experience', ['adventure', 'cultural']);//Tipo de experiencia
+            $table->foreignId('destination_id')->constrained('destinations');//Referencia al destino
+            $table->foreignId('provider_id')->constrained('providers');//Referencia al proveedor
+            $table->timestamps();//Fecha de creacion y actuualizacion
         });
     }
 

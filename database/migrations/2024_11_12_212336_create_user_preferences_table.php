@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('user_preferences', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');//Referencia a la tabla usuarios
+            $table->enum('category', ['adventure', 'cultural', 'family']);
+            $table->tinyInteger('preference_level');
             $table->timestamps();
         });
     }

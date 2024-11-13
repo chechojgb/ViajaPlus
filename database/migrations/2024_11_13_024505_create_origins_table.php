@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('origins', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');//Referencia a la tabla usuarios
-            $table->tinyInteger('rating');//Puntuacion dejada
-            $table->text('comment');//Comentario
+            $table->string('country');//Pais de origen
+            $table->string('city');//Ciudad de origen
+            $table->string('address');//Direccion de origen
+            $table->decimal('latitude');//Latitud de la direccion
+            $table->decimal('longitude');//Longitud de la direccion
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('origins');
     }
 };

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('recommendation_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');//Referencia a la tabla usuarios
+            $table->date('recommendation_date');//Fecha de recomendacion
             $table->timestamps();
         });
     }

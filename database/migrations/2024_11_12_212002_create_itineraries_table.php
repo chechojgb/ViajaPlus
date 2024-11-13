@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('itineraries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users'); // Relación con usuarios
+            $table->string('name');//Nombre del itinerario
+            $table->date('star_date');//Inicio
+            $table->date('end_date');//Fin
+            $table->foreignId('destination_id')->constrained('destinations');//Referencia a la tabla destinos
+            $table->enum('estado',['planned', 'confirmed', 'completed']);//Estado del itinerario
             $table->timestamps();
         });
     }
