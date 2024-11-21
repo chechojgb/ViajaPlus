@@ -12,7 +12,8 @@ class AccomodationsController extends Controller
      */
     public function index()
     {
-        //
+        $accomodations = accomodations::all();
+        return view('view', compact('accomodations'));
     }
 
     /**
@@ -21,6 +22,7 @@ class AccomodationsController extends Controller
     public function create()
     {
         //
+        return view('acommodations.create');
     }
 
     /**
@@ -28,7 +30,15 @@ class AccomodationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'night_price' => 'required|decimal:1,999999',
+            'capacity' => 'required|int|max:100',
+            'address' => 'required|string|max:255',
+        ]);
+        accomodations::create($request->all());
+        return redirect()->route('accomodations.view')->with('success', 'accommodations create with successfully');
     }
 
     /**
@@ -36,7 +46,7 @@ class AccomodationsController extends Controller
      */
     public function show(accomodations $accomodations)
     {
-        //
+        return view('accomodations.show', compact('accomodations'));
     }
 
     /**
@@ -44,7 +54,7 @@ class AccomodationsController extends Controller
      */
     public function edit(accomodations $accomodations)
     {
-        //
+        return view('accomodations.edit');
     }
 
     /**
@@ -52,7 +62,15 @@ class AccomodationsController extends Controller
      */
     public function update(Request $request, accomodations $accomodations)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'night_price' => 'required|decimal:1,999999',
+            'capacity' => 'required|int|max:100',
+            'address' => 'required|string|max:255',
+        ]);
+        $accomodations->update($request->all());
+        return redirect()->route('accomodations.index')->with('succes', 'accomodations update with succesfuly');
     }
 
     /**
@@ -60,6 +78,7 @@ class AccomodationsController extends Controller
      */
     public function destroy(accomodations $accomodations)
     {
-        //
+        $accomodations->delete();
+        return redirect()->route('accomodations.index')->with('succes', 'accomodations delete with succesfuly');
     }
 }

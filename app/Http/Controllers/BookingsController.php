@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bookings;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class BookingsController extends Controller
@@ -12,7 +13,8 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = bookings::all();
+        return view('booking.index', compact('bookings'));
     }
 
     /**
@@ -20,7 +22,7 @@ class BookingsController extends Controller
      */
     public function create()
     {
-        //
+        return view('view booking');
     }
 
     /**
@@ -28,7 +30,18 @@ class BookingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $request->validate([
+            'booking_type' => 'required|enum',
+        ]);
+        $booking = new bookings();
+        $booking->user_id = $user;
+        $booking->booking_type = $request->booking_type;
+        $booking->start_date = $request->star_date;
+        $booking->end_date = $request->end_date;
+        $booking->status = $request->status;
+        $booking->save();
+        return redirect()->route('view')->with('success', 'booking create with successfuly');
     }
 
     /**
@@ -36,7 +49,7 @@ class BookingsController extends Controller
      */
     public function show(bookings $bookings)
     {
-        //
+        return view('show.booking', compact('bookings'));
     }
 
     /**
@@ -44,7 +57,7 @@ class BookingsController extends Controller
      */
     public function edit(bookings $bookings)
     {
-        //
+        return view('edit.booking');
     }
 
     /**
@@ -52,7 +65,19 @@ class BookingsController extends Controller
      */
     public function update(Request $request, bookings $bookings)
     {
-        //
+        $user = Auth::user();
+        $usuario = bookings::updateOrCreate(
+            ['user_id' => $user->id], // Condición para encontrar el usuario
+            [
+                'nombres' => $request->nombres,
+                'apellidos' => $request->apellidos,
+                'booking_type' => $request->booking_type,
+                'start_date' => $request->star_date,
+                'end_date' => $request->end_date,
+                'status' => $request->status
+            ]
+        );
+        return redirect()->route('view')->with('success', 'booking update with successfuly');
     }
 
     /**
@@ -60,6 +85,7 @@ class BookingsController extends Controller
      */
     public function destroy(bookings $bookings)
     {
-        //
+        $bookings->delete();
+        return redirect()->route('accomodations.index')->with('succes', 'booking delete with succesfuly');
     }
 }

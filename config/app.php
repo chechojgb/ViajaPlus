@@ -15,6 +15,21 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available Languages
+    |--------------------------------------------------------------------------
+    |
+    |List all locales that your application works with. 
+    |
+    */
+
+    'available_locales' => [
+        'English' => 'en',
+        'Spanish' => 'es',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -78,9 +93,9 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'es'),
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'es'),
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
