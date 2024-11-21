@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');//Nombre del proveedor
-            $table->enum('provider_type', ['travel_agency', 'local_guide']);//Tipo de proveedor
+            $table->string('name')->nullable();//Nombre del proveedor
+            $table->enum('provider_type', ['travel_agency', 'local_guide'])->nullable();//Tipo de proveedor
             $table->string('contact');//Informacion de contato
             $table->string('address');//Direccion de proveedor
-            $table->foreignId('destination_id')->constrained('destinations');//Referencia a la tabla destino
+            $table->string('email')->nullable();
+            $table->string('status')->default('active')->nullable();
+            // $table->foreignId('destination_id')->constrained('destinations');//Referencia a la tabla destino
             $table->timestamps();
         });
     }
