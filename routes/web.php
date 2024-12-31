@@ -51,3 +51,6 @@ Route::middleware('auth')->group(function () {
 Route::put('/providers/{provider}/update', [ProvidersController::class, 'update'])->name('providers.update');
 
 
+use App\Livewire\UserSearch;
+ 
+Route::get('/userprob', UserSearch::class);
