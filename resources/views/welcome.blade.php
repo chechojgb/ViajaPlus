@@ -25,8 +25,8 @@
             <div class="relative flex h-16 items-center justify-between border-b border-gray-200">
                 <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <img class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=violet&amp;shade=500"
+                    <img class="h-16 w-auto"
+                    src="{{asset('images/logo.png')}}?color=violet&amp;shade=500"
                     alt="Your Company">
                 </div>
 
@@ -206,71 +206,25 @@
 
 
         @livewire('tab-switcher')
+        <x-creditCard/>
        
-        <div class=" p-6  shadow-md  flex flex-col items-center bg-gray-100">
-            <div class="text-center my-6">
-              <h2 class="text-2xl font-bold text-gray-800">Más opciones para tu viaje</h2>
-              <p class="text-sm text-gray-600">Acumula <span class="font-semibold">Millas LATAM Pass</span> y <span class="font-semibold">Puntos Calificables</span></p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 max-w-6xl">
-              <!-- Carta 1 -->
-              <div class="bg-pink-100 rounded-lg shadow-md p-6 flex flex-col justify-between h-auto">
-                <div>
-                  <span class="bg-pink-200 text-pink-800 text-sm font-semibold px-2 py-1 rounded">Paquetes</span>
-                  <h3 class="text-xl font-bold text-gray-800 mt-4">Escoge un paquete diseñado para ti</h3>
-                  <p class="text-sm text-gray-600 mt-2">Acumula millas</p>
-                </div>
-                <div class="mt-4">
-                  <a href="#" class="text-pink-600 font-semibold hover:underline">Comprar un paquete &rarr;</a>
-                  <img src="{{asset('images/welcome/image1.png')}}" alt="Hoteles" class="mt-4 w-full h-auto object-cover">
-                </div>
-                <p class="text-xs text-gray-500 mt-4">Powered by <strong>Despegar</strong></p>
-              </div>
-          
-              <!-- Carta 2 -->
-              <div class="bg-yellow-100 rounded-lg shadow-md p-6 flex flex-col justify-between h-auto">
-                <div>
-                  <span class="bg-yellow-200 text-yellow-800 text-sm font-semibold px-2 py-1 rounded">Hoteles</span>
-                  <h3 class="text-xl font-bold text-gray-800 mt-4">Encuentra tu descanso en cualquier lugar</h3>
-                  <p class="text-sm text-gray-600 mt-2">Acumula millas</p>
-                </div>
-                <div class="mt-4 flex-grow">
-                  <a href="#" class="text-yellow-600 font-semibold hover:underline">Reservar alojamiento &rarr;</a>
-                  <img src="{{asset('images/welcome/image2.png')}}" alt="Hoteles" class="mt-4 w-full h-auto object-cover">
-                </div>
-                <p class="text-xs text-gray-500 mt-4">Powered by <strong>Booking.com</strong></p>
-              </div>
-              
-          
-              <!-- Carta 3 -->
-              <div class="bg-green-100 rounded-lg shadow-md p-6 flex flex-col justify-between h-auto">
-                <div>
-                  <span class="bg-green-200 text-green-800 text-sm font-semibold px-2 py-1 rounded">Carros</span>
-                  <h3 class="text-xl font-bold text-gray-800 mt-4">Ten un carro esperándote en tu próximo destino</h3>
-                  <p class="text-sm text-gray-600 mt-2">Acumula millas</p>
-                </div>
-                <div class="mt-4">
-                  <a href="#" class="text-green-600 font-semibold hover:underline">Alquilar un carro &rarr;</a>
-                  <img src="{{asset('images/welcome/image3.png')}}" alt="Hoteles" class="mt-4 w-full h-auto object-cover">
-                </div>
-                <p class="text-xs text-gray-500 mt-4">Powered by <strong>Rentalcars.com</strong></p>
-              </div>
-          
-              <!-- Carta 4 -->
-              <div class="bg-blue-100 rounded-lg shadow-md p-6 flex flex-col justify-between h-auto">
-                <div>
-                  <span class="bg-blue-200 text-blue-800 text-sm font-semibold px-2 py-1 rounded">Asistencia en viaje</span>
-                  <h3 class="text-xl font-bold text-gray-800 mt-4">Viaja con tranquilidad y obtén cobertura donde estés</h3>
-                  <p class="text-sm text-gray-600 mt-2">Acumula millas</p>
-                </div>
-                <div class="mt-4">
-                  <a href="#" class="text-blue-600 font-semibold hover:underline">Cotizar asistencia &rarr;</a>
-                  <img src="{{asset('images/welcome/image4.png')}}" alt="Hoteles" class="mt-4 w-full h-auto object-cover">
-                </div>
-                <p class="text-xs text-gray-500 mt-4">Powered by <strong>Assist Card</strong></p>
+        <x-welcomeOptions/>
+        {{-- <div class="min-h-auto flex items-center justify-center mt-10">
+            <div class="bg-gray-100 rounded-lg shadow-md p-4 flex items-center space-x-4">
+              <!-- Imagen -->
+              <img src="{{asset('images/cards.png')}}" alt="Tarjetas LATAM Pass" class="w-24 h-auto">
+            
+              <!-- Texto y enlace -->
+              <div>
+                <p class="text-lg font-semibold text-gray-800">
+                  Hasta <span class="text-indigo-600 font-bold">30% de cashback</span> en pasajes. ¡Pide tu tarjeta LATAM Pass!
+                </p>
+                <a href="#" class="text-indigo-600 font-semibold hover:underline mt-2 block">
+                  Solicitar tarjeta &rarr;
+                </a>
               </div>
             </div>
-        </div>
+          </div> --}}
           
         @livewireScripts
 
