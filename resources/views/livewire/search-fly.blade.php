@@ -7,24 +7,42 @@
     <div>
         <!-- Campo Origen -->
         <label for="origen" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Origen</label>
-        <input type="text" id="origen" name="origen" placeholder="Ciudad de origen" wire:model.live="searchOrigen"
-            class="mt-1 block w-40 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-    
-        @if (strlen($searchOrigen) >= 2)
-            <ul class="overflow-y-auto max-h-32 mt-2 bg-white rounded-md shadow-lg">
-                @forelse ($searchFlyOrigen as $destination)
-                <li wire:key="{{ $destination->id }}" class="py-2.5 px-5 text-sm font-medium text-gray-900 hover:bg-gray-100 rounded-lg cursor-pointer" wire:click="$set('searchOrigen', '{{ $destination->name }}')">{{ $destination->name }}</li>
-                    
+        <input 
+    type="text" 
+    id="origen" 
+    name="origen" 
+    placeholder="Ciudad de origen" 
+    wire:model.live="searchOrigen" 
+    class="mt-1 block w-40 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+
+<!-- Agrega el script para escuchar el evento -->
+<script>
+    Livewire.on('refreshInput', value => {
+        const input = document.querySelector('input[wire\\:model.live="searchOrigen"]');
+        if (input) {
+            input.value = value; // Actualiza el valor visible del input
+        }
+    });
+</script>
+        @if ($showDropdownOrigen)
+        <ul class="overflow-y-auto max-h-32 mt-2 bg-white rounded-md shadow-lg">
+            @forelse ($results as $destination)
+                    <li wire:key="{{ $destination->id }}" 
+                        class="py-2.5 px-5 text-sm font-medium text-gray-900 hover:bg-gray-100 rounded-lg cursor-pointer"
+                        wire:click="selectOrigen('{{ e($destination->name) }}')">
+                        {{ $destination->name }}
+                    </li>
                 @empty
-                    <li>No se encontraron resultados.</li>
+                    <li class="py-2.5 px-5 text-sm text-gray-500">No se encontraron resultados.</li>
                 @endforelse
             </ul>
-            
         @endif
     </div>
     
+    
+    
     <!-- Campo Destino -->
-    <div>
+    {{-- <div>
         <label for="destino" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Destino</label>
         <input type="text" id="destino" name="destino" placeholder="Ciudad de destino" wire:model.live="searchDestino"
             class="mt-1 block w-40 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
@@ -38,7 +56,7 @@
                 @endforelse
             </ul>
         @endif
-    </div>
+    </div> --}}
     
     
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire;
 
 use Livewire\Attributes\Url;
@@ -13,38 +12,50 @@ class SearchFly extends Component
     public $searchOrigen = '';
     #[Url(history: true)]
     public $searchDestino = ''; 
-    
-    public function render()
-    {
-        $searchFlyOrigen = collect();  
-        $searchFlyDestino = collect(); 
+    public $results = [];
+    public $selectedOrigen;
+    public $errorMessage;
+    public $showDropdownOrigen = false;
 
-        // Buscar origen (ciudad o país)
+    public function updatedSearchOrigen($value)
+    {
+        $this->showDropdownOrigen = strlen($value) >= 2;
+        $this->search();
+    }
+
+    public function search()
+    {
+        $this->results = [];
+        $this->errorMessage = null;
+
         if (strlen($this->searchOrigen) >= 2) {
             $country = Country::where('name', 'like', '%' . $this->searchOrigen . '%')->first();
             if ($country) {
-                $searchFlyOrigen = $country->cities; 
+                $this->results = $country->cities; 
             } else {
                 $city = City::where('name', 'like', '%' . $this->searchOrigen . '%')->first();
                 if ($city) {
-                    $searchFlyOrigen = collect([$city]); 
+                    $this->results = collect([$city]); 
                 }
             }
         }
 
-        // Buscar destino (ciudad o país)
-        if (strlen($this->searchDestino) >= 2) {
-            $country = Country::where('name', 'like', '%' . $this->searchDestino . '%')->first();
-            if ($country) {
-                $searchFlyDestino = $country->cities; 
-            } else {
-                $city = City::where('name', 'like', '%' . $this->searchDestino . '%')->first();
-                if ($city) {
-                    $searchFlyDestino = collect([$city]); 
-                }
-            }
+        if (empty($this->results)) {
+            $this->errorMessage = 'No se encontraron resultados.';
         }
+    }
 
-        return view('livewire.search-fly', compact('searchFlyOrigen', 'searchFlyDestino'));
+    public function selectOrigen($value)
+    {
+        $this->searchOrigen = $value;
+        $this->showDropdownOrigen = false;
+        
+        $this->emit('refreshInput', $value);
+
+    }
+
+    public function render()
+    {
+        return view('livewire.search-fly');
     }
 }
