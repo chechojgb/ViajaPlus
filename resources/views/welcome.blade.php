@@ -206,7 +206,7 @@
 
 
         @livewire('tab-switcher')
-        <x-creditCard/>
+        {{-- <x-creditCard/> --}}
        
         <x-welcomeOptions/>
         {{-- <div class="min-h-auto flex items-center justify-center mt-10">
@@ -227,7 +227,11 @@
           </div> --}}
           
         @livewireScripts
-
+        <select name="select">
+            <option value="value1">Value 1</option>
+            <option value="value2" selected>Value 2</option>
+            <option value="value3">Value 3</option>
+          </select>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     </body>
 </html>
